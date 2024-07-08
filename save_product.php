@@ -5,6 +5,23 @@ include 'DVD.php';
 include 'Book.php';
 include 'Furniture.php';
 
+class ProductFactory {
+    public static function createProduct($type) {
+        $classMap = [
+            'book' => 'Book',
+            'DVD' => 'DVD',
+            'furniture' => 'Furniture'
+        ];
+
+        if (array_key_exists($type, $classMap)) {
+            $className = $classMap[$type];
+            return new $className();
+        } else {
+            throw new Exception("Invalid product type.");
+        }
+    }
+}
+
 // Check if form data is received
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -18,33 +35,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $additionalInfo = $_POST['additionalInfo'];
     }
 
-    // Create product object based on type
-    if ($type === 'book') {
-        $product = new Book();
-    } elseif ($type === 'DVD') {
-        $product = new DVD();
-    } elseif ($type === 'furniture') {
-        $product = new Furniture(); 
-    } else {
-        // Handle invalid product type
-        echo "Invalid product type.";
-        exit(); 
-    }
-
-    // Set product properties
-    $product->setName($name);
-    $product->setPrice($price);
-    $product->setType($type);
-    $product->setAdditionalInfo($additionalInfo);
-
-    // Save product to database
     try {
+        // Create product object based on type using factory
+        $product = ProductFactory::createProduct($type);
+
+        // Set product properties
+        $product->setName($name);
+        $product->setPrice($price);
+        $product->setType($type);
+        $product->setAdditionalInfo($additionalInfo);
+
+        // Save product to database
         $product->save();
+        
         // Redirect to product list page
         header("Location: index.php");
         exit();
     } catch (Exception $e) {
-        // Handle database connection errors
+        // Handle errors (invalid product type or database connection errors)
         echo "Error: " . $e->getMessage();
     }
 } else {
