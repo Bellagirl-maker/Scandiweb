@@ -97,8 +97,7 @@
             return;
         }
 
-        // Confirm deletion
-        var confirmDelete = confirm("Are you sure you want to delete the selected products?");
+        
         if (confirmDelete) {
             // Submit form for deleting selected products
             var form = document.createElement('form');
