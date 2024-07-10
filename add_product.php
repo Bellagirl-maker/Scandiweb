@@ -1,9 +1,9 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
-    $username = "root"; // default XAMPP MySQL username
-    $password = ""; // default XAMPP MySQL password
-    $dbname = "product_db";
+    $username = "id22409566_root"; 
+    $password = "AdMiN@24"; 
+    $dbname = "id22409566_product_db";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="mb-4">
-                <label for="productType" class="block text-gray-700 text-sm font-bold mb-2">Product Type:</label>
+                <label for="productType" class="block text-gray-700 text-sm font-bold mb-2">Type Switcher:</label>
                 <select id="productType" name="productType" onchange="showProductAttributes()" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <option value="DVD">DVD</option>
                     <option value="Book">Book</option>
