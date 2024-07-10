@@ -1,9 +1,12 @@
 <?php
+
+ob_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "product_db";
+    $username = "id22409566_root";
+    $password = "AdMiN@24";
+    $dbname = "id22409566_product_db";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -36,4 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: index.php");
     exit();
 }
+
+ob_end_flush();
 ?>
